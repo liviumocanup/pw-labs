@@ -1,0 +1,31 @@
+#! /usr/bin/env bash
+
+while getopts "u:s:h" opt; do
+  case $opt in
+  u)
+    url=$OPTARG
+    java -cp "$(pwd)/target/pw-2-1.0-SNAPSHOT-jar-with-dependencies.jar" utm.Scrapper "$url" "$(pwd)"
+    ;;
+  s)
+    # Use shift to remove the '-s' option from the argument list
+    shift
+    # Join all the remaining arguments into a single string separated by spaces
+    query="$*"
+    java -cp "$(pwd)/target/pw-2-1.0-SNAPSHOT-jar-with-dependencies.jar" utm.Searcher "$query"
+    ;;
+  h)
+    echo "go2web -u <URL>         # make an HTTP request to the specified URL and print the response"
+    echo "go2web -s <search-term> # make an HTTP request to search the term using your favorite search engine and print top 10 results"
+    echo "go2web -h               # show this help"
+    exit 1
+    ;;
+  \?)
+    echo "Invalid option: -$OPTARG" >&2
+    exit 1
+    ;;
+  :)
+    echo "Option -$OPTARG requires an argument." >&2
+    exit 1
+    ;;
+  esac
+done
