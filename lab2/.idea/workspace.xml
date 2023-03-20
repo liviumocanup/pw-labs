@@ -4,11 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca5f57b6-6b04-45b6-8174-92e60ec63ff5" name="Changes" comment="" />
+    <list default="true" id="ca5f57b6-6b04-45b6-8174-92e60ec63ff5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/utm/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/httpstwitchtv.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cache/httpworldtimeapiorgapiip.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utm/Scrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utm/Scrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utm/Searcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utm/Searcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utm/Scrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utm/Scrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/utm/Searcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/utm/Searcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pw-2-1.0-SNAPSHOT-jar-with-dependencies.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/pw-2-1.0-SNAPSHOT-jar-with-dependencies.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/pw-2-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/pw-2-1.0-SNAPSHOT.jar" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -28,18 +55,19 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/liviu/Documents/utm/anul3/pw/pw-2",
+    "last_opened_file_path": "D:/else/pw-2-idk/pw-labs/lab2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Global Libraries",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "terminal",
+    "settings.editor.selected.configurable": "editor.preferences.import",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -79,6 +107,7 @@
       <workItem from="1678030775535" duration="956000" />
       <workItem from="1678207728284" duration="7959000" />
       <workItem from="1678219011847" duration="17887000" />
+      <workItem from="1679276207639" duration="4984000" />
     </task>
     <servers />
   </component>
