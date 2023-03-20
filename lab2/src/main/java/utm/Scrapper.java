@@ -9,14 +9,19 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.HttpURLConnection;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Scanner;
+import javax.net.ssl.SSLSocket;
 
 public class Scrapper {
+
+    private static BufferedReader in;
+    private final static int HTTP_MOVED_PERM = 301;
+    private final static int HTTP_MOVED_TEMP = 302;
+    private final static int HTTP_SEE_OTHER = 303;
 
     public static void main(String[] args) throws IOException {
         // first verify whether the Scrapper is called correctly
@@ -62,9 +67,9 @@ public class Scrapper {
 
     private static String requestResponse(String urlString) {
         try {
-            HttpURLConnection connection = establishConnection(urlString);
-            String contentType = connection.getContentType();
-            String responseString = getResponseBodyAsString(connection);
+            SSLSocket socket = establishConnection(urlString);
+            String contentType = getHeader(in, "Content-Type");
+            String responseString = getResponseBodyAsString(in);
             String formattedResponse = null;
 
             if (contentType.contains("application/json")) {
@@ -78,7 +83,7 @@ public class Scrapper {
                 System.out.println("Content type not supported.");
             }
 
-            connection.disconnect();
+            socket.close();
             return formattedResponse;
         } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
@@ -86,28 +91,34 @@ public class Scrapper {
         }
     }
 
-    private static HttpURLConnection establishConnection(String urlString) throws IOException {
+    private static SSLSocket establishConnection(String urlString) throws IOException {
         URL url = new URL(urlString);
-        HttpURLConnection connection;
+        SSLSocket socket;
         int status;
         do {
-            connection = (HttpURLConnection) url.openConnection();
-            status = connection.getResponseCode();
-            if (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM
-                    || status == HttpURLConnection.HTTP_SEE_OTHER) {
-                String redirectUrl = connection.getHeaderField("Location");
-                connection.disconnect();
+            socket = Response.establish(url.getHost(), url.getPath());
+
+            in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            status = getResponseStatus(in);
+            if (status == HTTP_MOVED_TEMP || status == HTTP_MOVED_PERM || status == HTTP_SEE_OTHER) {
+                String redirectUrl = getHeader(in, "Location");
+                socket.close();
                 url = new URL(redirectUrl);
             }
-        } while (status == HttpURLConnection.HTTP_MOVED_TEMP || status == HttpURLConnection.HTTP_MOVED_PERM
-                || status == HttpURLConnection.HTTP_SEE_OTHER);
+        } while (status == HTTP_MOVED_TEMP || status == HTTP_MOVED_PERM || status == HTTP_SEE_OTHER);
 
-        return connection;
+        return socket;
     }
 
-    private static String getResponseBodyAsString(HttpURLConnection connection) throws IOException {
-        try (Scanner scanner = new Scanner(connection.getInputStream(), StandardCharsets.UTF_8).useDelimiter("\\A")) {
-            return scanner.hasNext() ? scanner.next() : "";
-        }
+    private static int getResponseStatus(BufferedReader in) throws IOException {
+        return Response.getResponseStatus(in);
+    }
+
+    private static String getHeader(BufferedReader in, String headerName) throws IOException {
+        return Response.getHeader(in, headerName);
+    }
+
+    public static String getResponseBodyAsString(BufferedReader in) throws IOException {
+        return Response.getResponseBodyAsString(in);
     }
 }
