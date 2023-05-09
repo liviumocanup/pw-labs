@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import {
     Box,
@@ -7,9 +7,11 @@ import {
     FormErrorMessage,
     FormLabel,
     Heading,
-    Input, Spinner,
+    Input, InputGroup, InputRightElement,
+    Spinner,
     VStack,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import * as Yup from 'yup';
 import useSubmit from "../../hooks/useSubmit";
 import {useAlertContext} from "../../context/alertContext";
@@ -18,6 +20,10 @@ import FullScreenSection from "../FullScreenSection";
 const LogIn = () => {
     const {isLoading, response, submit} = useSubmit();
     const {onOpen} = useAlertContext();
+
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
+
 
     const formik = useFormik({
         initialValues: {
@@ -64,12 +70,21 @@ const LogIn = () => {
                                 />
                                 <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
                             </FormControl>
-                            <FormControl isInvalid={formik.touched.password && formik.errors.password}>
+                            <FormControl isInvalid={formik.touched.password && formik.errors.password} pb={5}>
                                 <FormLabel htmlFor="password">Password</FormLabel>
-                                <Input id="password"
-                                       name="password"
-                                       {...formik.getFieldProps('password')}
-                                />
+                                <InputGroup>
+                                    <Input
+                                        id="password"
+                                        name="password"
+                                        type={showPassword ? "text" : "password"}
+                                        {...formik.getFieldProps('password')}
+                                    />
+                                    <InputRightElement width="4.5rem">
+                                        <Button h="1.75rem" size="sm" onClick={togglePasswordVisibility} variant={"none"}>
+                                            {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
                                 <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
                             </FormControl>
                             <Button type="submit" colorScheme="purple" width="25%">

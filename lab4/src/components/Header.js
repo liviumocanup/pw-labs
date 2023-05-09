@@ -65,7 +65,7 @@ const Header = () => {
                             <Link as={RouterLink} to="/">Home</Link>
                         </HStack>
                     </nav>
-                    <Box pl={44}>
+                    <Box pl={40} pr={8}>
                         <nav>
                             <Button onClick={togglePlay} variant="ghost" colorScheme="white">
                                 <FontAwesomeIcon icon={isPlaying ? faPause : faPlay}/>

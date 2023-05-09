@@ -3,20 +3,24 @@ import FullScreenSection from "../FullScreenSection";
 import {Box, Heading} from "@chakra-ui/react";
 import Card from "../Card";
 import {useQuizContext} from "../../context/QuizContext";
+import sunset from "../../images/sunset.png"
 
 const QuizzesSection = () => {
     const quizArray = useQuizContext();
 
     return (
         <FullScreenSection
-            backgroundColor="#14532d"
+            backgroundImage={sunset}
             isDarkBackground
             p={8}
             alignItems="flex-start"
             spacing={8}
             id="projects-section"
         >
-            <Heading as="h1" mt={20} mb={5}>
+            <Heading as="h1" mt={20} mb={5} color={"#C3B1E1"}
+                     style={{
+                         textShadow: '2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000',
+                     }}>
                 Featured Quizzes
             </Heading>
             <Box

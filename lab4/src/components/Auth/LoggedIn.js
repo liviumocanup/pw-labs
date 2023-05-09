@@ -50,9 +50,11 @@ const LoggedIn = () => {
         resetUserAnswers(userId)
 
         const users = JSON.parse(localStorage.getItem('users')) || [];
+        const updatedUsers = users.filter(user => user.username !== loggedInUser.username);
+        localStorage.setItem("users", JSON.stringify(updatedUsers));
         const data = {...loggedInUser, id: apiResponse.id}
-        users.push(data);
-        localStorage.setItem('users', JSON.stringify(users));
+        updatedUsers.push(data);
+        localStorage.setItem('users', JSON.stringify(updatedUsers));
         localStorage.setItem("loggedInUser", JSON.stringify(data));
     }
 
@@ -98,7 +100,7 @@ const LoggedIn = () => {
                     <p>{bio}</p>
                 </VStack>
                 <VStack textColor={"white"} mt={50}>
-                    <Button onClick={localLogOut} colorScheme="purple" width="67%" mb={3}>
+                    <Button onClick={localLogOut} colorScheme="purple" width={"63%"} mb={3}>
                         Log Out
                     </Button>
                     <HStack>

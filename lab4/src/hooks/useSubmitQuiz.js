@@ -3,16 +3,18 @@ import {useState} from 'react';
 const useSubmitQuiz = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const AccessToken = '753188dfa478870eea509375a8921ef7e8a226c0e4d94789e93f3fc77b2bd703';
+    const quizzesApiUrl = 'https://late-glitter-4431.fly.dev/api/v54/quizzes';
 
     const fetchQuiz = async (quizId, userId) => {
         setLoading(true);
         setError(null);
 
         try {
-            const response = await fetch(`https://late-glitter-4431.fly.dev/api/v54/quizzes/${quizId}`, {
+            const response = await fetch(`${quizzesApiUrl}/${quizId}`, {
                 method: 'GET',
                 headers: {
-                    'X-Access-Token': 'ae1c3820976c4c31beb8f2dc8951d73dc46292787d9a2940502958dc44c07fed',
+                    'X-Access-Token': AccessToken,
                     'Content-Type': 'application/json',
                 },
                 params: {
@@ -35,10 +37,10 @@ const useSubmitQuiz = () => {
         setError(null);
 
         try {
-            const response = await fetch(`https://late-glitter-4431.fly.dev/api/v54/quizzes/${quizId}/submit`, {
+            const response = await fetch(`${quizzesApiUrl}/${quizId}/submit`, {
                 method: 'POST',
                 headers: {
-                    'X-Access-Token': 'ae1c3820976c4c31beb8f2dc8951d73dc46292787d9a2940502958dc44c07fed',
+                    'X-Access-Token': AccessToken,
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({

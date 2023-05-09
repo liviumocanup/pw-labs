@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 
 const useQuizzesApi = () => {
-    const AccessToken = 'ae1c3820976c4c31beb8f2dc8951d73dc46292787d9a2940502958dc44c07fed';
+    const AccessToken = '753188dfa478870eea509375a8921ef7e8a226c0e4d94789e93f3fc77b2bd703';
     const quizzesApiUrl = 'https://late-glitter-4431.fly.dev/api/v54/quizzes';
 
     const [quizIds, setQuizIds] = useState({});

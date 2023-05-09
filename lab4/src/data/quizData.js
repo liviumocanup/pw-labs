@@ -93,8 +93,8 @@ const quizData = [
                 correct_answer: "Black"
             },
             {
-                question: "Which of the following are man-made structures NOT visible from space with the naked eye?",
-                answers: ["The Great Pyramids of Giza", "The Great Wall of China", "The Kennedy Space Centre", "The city of Las Vegas"],
+                question: "Which of the following are man-made structures visible from space with the naked eye?",
+                answers: ["The Great Wall of China", "The Kennedy Space Centre", "The city of Las Vegas"],
                 correct_answer: "The city of Las Vegas"
             },
             {

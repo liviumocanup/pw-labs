@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useFormik} from "formik";
 import {
     Box,
@@ -7,7 +7,7 @@ import {
     FormErrorMessage,
     FormLabel,
     Heading, HStack,
-    Input,
+    Input, InputGroup, InputRightElement,
     Select, Spinner,
     VStack,
 } from "@chakra-ui/react";
@@ -15,10 +15,14 @@ import * as Yup from 'yup';
 import useSubmit from "../../hooks/useSubmit";
 import {useAlertContext} from "../../context/alertContext";
 import FullScreenSection from "../FullScreenSection";
+import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 
 const SignUp = (props) => {
     const {isLoading, response, submit} = useSubmit();
     const {onOpen} = useAlertContext();
+
+    const [showPassword, setShowPassword] = useState(false);
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     const formik = useFormik({
         initialValues: {
@@ -99,13 +103,22 @@ const SignUp = (props) => {
                             </FormControl>
                             <FormControl isInvalid={formik.touched.password && formik.errors.password}>
                                 <FormLabel htmlFor="password">Password</FormLabel>
-                                <Input id="password"
-                                       name="password"
-                                       {...formik.getFieldProps('password')}
-                                />
+                                <InputGroup>
+                                    <Input
+                                        id="password"
+                                        name="password"
+                                        type={showPassword ? "text" : "password"}
+                                        {...formik.getFieldProps('password')}
+                                    />
+                                    <InputRightElement width="4.5rem">
+                                        <Button h="1.75rem" size="sm" onClick={togglePasswordVisibility} variant={"none"}>
+                                            {showPassword ? <ViewOffIcon /> : <ViewIcon />}
+                                        </Button>
+                                    </InputRightElement>
+                                </InputGroup>
                                 <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
                             </FormControl>
-                            <FormControl mb={5}>
+                            <FormControl pb={5}>
                                 <FormLabel htmlFor="type">Type of quizzes</FormLabel>
                                 <Select id="type" name="type">
                                     <option value="hireMe" style={{color: 'black'}}>
