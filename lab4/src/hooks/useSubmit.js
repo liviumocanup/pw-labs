@@ -4,14 +4,11 @@ import useApi from "./useApi";
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-/**
- * This is a custom hook that can be used to submit a form and simulate an API call
- */
 const useSubmit = () => {
     const [isLoading, setLoading] = useState(false);
     const [response, setResponse] = useState(null);
-    const { setLoggedIn, setName, setUsername } = useUserContext();
-    const { apiSignUp } = useApi();
+    const {setLoggedIn, setName, setUsername} = useUserContext();
+    const {apiSignUp} = useApi();
 
     const submit = async (type, data) => {
         setLoading(true);
@@ -32,7 +29,7 @@ const useSubmit = () => {
                 const apiResponse = await apiSignUp(data);
 
                 // Save the new user to localStorage
-                data = {...data, name:`${data.firstName} ${data.lastName}`}
+                data = {...data, name: `${data.firstName} ${data.lastName}`, id: apiResponse.id}
                 users.push(data);
                 localStorage.setItem('users', JSON.stringify(users));
                 localStorage.setItem("loggedInUser", JSON.stringify(data));

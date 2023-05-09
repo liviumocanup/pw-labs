@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import {useCallback} from 'react';
 
 const useApi = () => {
     const AccessToken = "ae1c3820976c4c31beb8f2dc8951d73dc46292787d9a2940502958dc44c07fed";
@@ -21,7 +21,7 @@ const useApi = () => {
                 "Content-Type": "application/json",
                 "X-Access-Token": AccessToken,
             },
-            body: JSON.stringify({ data }),
+            body: JSON.stringify({data}),
         });
 
         return await response.json();
@@ -38,12 +38,7 @@ const useApi = () => {
 
     const handleApiError = async (data, error) => {
         if (error.message.includes("Name has already been taken")) {
-            const users = await getUsers();
-            const user = users.find((user) => user.name === data.firstName && user.surname === data.lastName);
-
-            if (user) {
-                await deleteUser(user.id);
-            }
+            await apiDeleteUser(data)
         }
     };
 
@@ -62,7 +57,18 @@ const useApi = () => {
         }
     }, []);
 
-    return { apiSignUp };
+    const apiDeleteUser = useCallback(async (data) => {
+        const users = await getUsers();
+        const user = users.find((user) => user.name === data.firstName && user.surname === data.lastName);
+
+        if (user) {
+            return await deleteUser(user.id);
+        } else {
+            return undefined
+        }
+    }, []);
+
+    return {apiSignUp, apiDeleteUser};
 };
 
 export default useApi;

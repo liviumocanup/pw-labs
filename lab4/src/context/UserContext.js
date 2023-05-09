@@ -1,6 +1,4 @@
-// UserContext.js
-
-import { createContext, useContext, useEffect, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 
 const UserContext = createContext(undefined);
 
@@ -8,7 +6,7 @@ export const useUserContext = () => {
     return useContext(UserContext);
 };
 
-export const UserProvider = ({ children }) => {
+export const UserProvider = ({children}) => {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [name, setName] = useState();
     const [username, setUsername] = useState();
@@ -25,7 +23,7 @@ export const UserProvider = ({ children }) => {
 
     return (
         <UserContext.Provider
-            value={{ isLoggedIn, setLoggedIn, name, setName, username, setUsername }}
+            value={{isLoggedIn, setLoggedIn, name, setName, username, setUsername}}
         >
             {children}
         </UserContext.Provider>

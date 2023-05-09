@@ -1,29 +1,25 @@
-import React, {useEffect, useRef, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope} from "@fortawesome/free-solid-svg-icons";
-import {
-    faGithub,
-    faLinkedin,
-    faMedium,
-    faStackOverflow,
-} from "@fortawesome/free-brands-svg-icons";
-import {Box, Button, HStack, Link, Text} from "@chakra-ui/react";
+import React, {useContext, useEffect, useRef, useState} from "react";
+import {Box, Button, HStack, Link} from "@chakra-ui/react";
 import {useUserContext} from '../context/UserContext';
 import {Link as RouterLink} from 'react-router-dom';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlay, faPause, faVolumeUp, faVolumeDown} from '@fortawesome/free-solid-svg-icons';
+import AudioContext from "../context/AudioContext";
 
 const Header = () => {
+    const audio = useContext(AudioContext);
     const {isLoggedIn, name} = useUserContext();
+    const [isPlaying, setIsPlaying] = useState(true);
 
-    const handleClick = (anchor) => {
-        const id = `${anchor}-section`;
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-            });
+    const togglePlay = () => {
+        if (isPlaying) {
+            audio.pause();
+        } else {
+            audio.play();
         }
+        setIsPlaying(!isPlaying);
     };
+
 
     const prevScroll = useRef(0)
     const boxAppear = useRef("0")
@@ -55,6 +51,7 @@ const Header = () => {
             transitionTimingFunction="ease-in-out"
             backgroundColor="#18181b"
             ref={boxRef}
+            zIndex={1000}
         >
             <Box color="white" maxWidth="1280px" margin="0 auto">
                 <HStack
@@ -66,12 +63,33 @@ const Header = () => {
                     <nav>
                         <HStack spacing={8}>
                             <Link as={RouterLink} to="/">Home</Link>
-                            {/*{isLoggedIn ?*/}
-                            {/*    <a href={"#projects"} onClick={() => handleClick("projects")}>Featured Quizzes</a> :*/}
-                            {/*    null*/}
-                            {/*}*/}
                         </HStack>
                     </nav>
+                    <Box pl={44}>
+                        <nav>
+                            <Button onClick={togglePlay} variant="ghost" colorScheme="white">
+                                <FontAwesomeIcon icon={isPlaying ? faPause : faPlay}/>
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    audio.volume = Math.max(audio.volume - 0.1, 0);
+                                }}
+                                variant="ghost"
+                                colorScheme="white"
+                            >
+                                <FontAwesomeIcon icon={faVolumeDown}/>
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    audio.volume = Math.min(audio.volume + 0.1, 1);
+                                }}
+                                variant="ghost"
+                                colorScheme="white"
+                            >
+                                <FontAwesomeIcon icon={faVolumeUp}/>
+                            </Button>
+                        </nav>
+                    </Box>
                     <nav>
                         <HStack spacing={8}>
                             {isLoggedIn ?
@@ -89,7 +107,6 @@ const Header = () => {
                                     </Link>
                                 </>
                             }
-                            {/*<FontAwesomeIcon icon={social.icon} size="2x"/>*/}
                         </HStack>
                     </nav>
                 </HStack>
